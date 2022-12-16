@@ -1,4 +1,4 @@
-FROM harbor.mgmt-bld.oncp.dev/base_images/alpine:3.12.0
+FROM alpine:3.12.0
 RUN apk add --no-cache python3 py3-pip
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
