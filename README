@@ -1,0 +1,19 @@
+# Setup docker registry on local
+docker container stop registry
+
+docker run -d \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:5001 \
+  -p 5001:5001 \
+  --name docker-local-registry \
+  registry:2
+
+docker build --target wrapper_s1 --tag merit/tracwrapper:s1 .
+docker tag merit/tracwrapper:s1 localhost:5001/tracwrapper/s1
+docker push localhost:5001/tracwrapper/s1
+
+
+docker build --target wrapper_s2 --tag merit/tracwrapper .
+docker tag merit/tracwrapper localhost:5001/tracwrapper/
+docker push localhost:5001/tracwrapper
+
+docker run merit/tracwrapper .
