@@ -1,4 +1,5 @@
-FROM alpine:3.12.0 AS wrapper_s1
+#FROM alpine:3.12.0 AS wrapper_s1
+FROM nickgryg/alpine-pandas
 RUN apk add --no-cache python3 py3-pip
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
@@ -9,10 +10,10 @@ RUN python3 -m pip install --upgrade pip --trusted-host files.pythonhosted.org -
 RUN pip install wheel --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org oauthlib -vvv
 
 COPY requirements_main.txt .
-RUN pip install pandas --no-cache-dir --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org oauthlib -vvv
+#RUN pip install pandas --no-cache-dir --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org oauthlib -vvv
 
-FROM merit/tracwrapper:s1 AS wrapper_s2
-COPY --from=wrapper_s1 /opt/venv/ /opt/venv/
+#FROM merit/tracwrapper:s1 AS wrapper_s2
+#COPY --from=wrapper_s1 /opt/venv/ /opt/venv/
 RUN pip install pypandoc --no-cache-dir --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org oauthlib -vvv
 RUN pip install pyspark --no-cache-dir --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org oauthlib -vvv
 RUN pip install -r requirements_main.txt --no-cache-dir --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org oauthlib -vvv
