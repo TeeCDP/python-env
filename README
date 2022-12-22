@@ -32,3 +32,6 @@ docker push localhost:5001/tracwrapper
 docker run merit/tracwrapper .
 
 
+docker pull nickgryg/alpine-pandas
+
+
