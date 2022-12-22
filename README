@@ -1,4 +1,6 @@
-# Setup docker registry on local
+## On local, we can use local registry in place of remote container registry
+## Setup docker registry on local at localhost:5001
+
 docker container stop registry
 
 docker run -d \
@@ -7,13 +9,26 @@ docker run -d \
   --name docker-local-registry \
   registry:2
 
+## Please replace registry path localhost:5001 by remote gcr registry in GCP
+## Build stage 1
 docker build --target wrapper_s1 --tag merit/tracwrapper:s1 .
+
+## Tag stage 1
 docker tag merit/tracwrapper:s1 localhost:5001/tracwrapper/s1
+
+## Push stage 1 image to registry
 docker push localhost:5001/tracwrapper/s1
 
-
+## Build Final image using base image as image pushed as stage image
 docker build --target wrapper_s2 --tag merit/tracwrapper .
+
+## Tag Final image
 docker tag merit/tracwrapper localhost:5001/tracwrapper/
+
+## Push Final image to registry
 docker push localhost:5001/tracwrapper
 
+## Run container from final image.
 docker run merit/tracwrapper .
+
+
