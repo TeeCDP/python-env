@@ -1,0 +1,10 @@
+FROM asaifee02/python-env:3.9.7-slim AS venv
+
+FROM openjdk:11-slim
+
+RUN apt-get update -y && apt-get install -y python3 python3-pip
+RUN python3 -m pip install --no-cache --upgrade pip
+RUN ln -s /usr/bin/python3 /usr/local/bin/python3
+
+COPY --from=venv /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"

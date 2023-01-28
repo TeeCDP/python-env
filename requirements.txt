@@ -1,8 +1,13 @@
-click==8.0.3
-colorama==0.4.4
-Flask==2.0.2
-itsdangerous==2.0.1
-Jinja2==3.0.3
-MarkupSafe==2.0.1
-Werkzeug==2.0.2
-gunicorn==20.1.0
+numpy
+pandas
+pypandoc>=1.4
+pyspark==3.2.1
+requests-toolbelt>=0.9.1
+requests==2.24.0
+flask==2.0.2
+
+# Test-only dependencies, do not list in setup.py
+twine
+unittest-xml-reporting==2.4.0
+setuptools_scm==4.1.2
+setuptools_git
