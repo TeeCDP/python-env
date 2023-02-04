@@ -59,3 +59,8 @@ RUN mkdir /arrow \
     && python setup.py build_ext --build-type=$ARROW_BUILD_TYPE --with-parquet \
     && python setup.py install \
     && rm -rf /arrow /tmp/apache-arrow.tar.gz
+
+USER root
+RUN apk add --update openjdk11 curl busybox-extras && addgroup -S nonrootgroup && adduser -S nonroot -G nonrootgroup
+USER nonroot
+WORKDIR /home/nonroot
