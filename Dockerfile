@@ -60,6 +60,10 @@ RUN mkdir /arrow \
     && python setup.py install \
     && rm -rf /arrow /tmp/apache-arrow.tar.gz
 
+RUN apk add --no-cache git \
+        curl \
+        openssl \
+
 USER root
 RUN apk add --update openjdk11 curl busybox-extras && addgroup -S nonrootgroup && adduser -S nonroot -G nonrootgroup
 USER nonroot
